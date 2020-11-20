@@ -18,7 +18,7 @@ const EditExercise = () => {
   const [users, setUsers] = useState([]);
   const params = useParams();
   useEffect(async () => {
-    axios.get('http://localhost:3000/exercises/' + params.id)
+    axios.get('http://localhost:5000/exercises/' + params.id)
     .then(response => {
         setUsername(response.data.username);
         setDescription(response.data.description);
@@ -29,7 +29,7 @@ const EditExercise = () => {
       console.log(error);
     })
 
-    axios.get('http://localhost:3000/users/')
+    axios.get('http://localhost:5000/users/')
     .then(response => {
       if (response.data.length > 0) {
         setUsers(response.data.map(user => user.username));

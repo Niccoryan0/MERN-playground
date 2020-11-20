@@ -5,7 +5,7 @@ const CreateUser = () => {
   const [username, setUsername] = React.useState('');
   const updateUsername = e => setUsername(e.target.value)
 
-  const submitUser = () => {
+  const submitUser = (e) => {
     e.preventDefault();
 
     const user = {
@@ -14,7 +14,7 @@ const CreateUser = () => {
 
     console.log(user);
 
-    axios.post('http://localhost:3000/users/add', user)
+    axios.post('http://localhost:5000/users/add', user)
       .then(res => console.log(res.data));
 
     setUsername('');
