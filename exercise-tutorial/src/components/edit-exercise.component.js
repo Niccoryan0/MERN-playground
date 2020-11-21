@@ -7,13 +7,16 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const EditExercise = () => {
   const [username, setUsername] = useState('');
-  const updateUsername = e => setUsername(e.target.value);
+  const updateUsername = e => {
+    console.log(e);
+    setUsername(e.target.value)
+  };
   const [description, setDescription] = useState('');
   const updateDescription = e => setDescription(e.target.value);
   const [duration, setDuration] = useState(0);
   const updateDuration = e => setDuration(e.target.value);
   const [date, setDate] = useState(new Date());
-  const updateDate = e => setDate(e.target.value);
+  const updateDate = date => setDate(date);
 
   const [users, setUsers] = useState([]);
   const params = useParams();
@@ -42,23 +45,23 @@ const EditExercise = () => {
     }
     fetchData();
   }, []);
-
+  
   const submitForm = (e) => {
     e.preventDefault();
-
     const exercise = {
-      username,
-      description,
-      duration,
-      date
+      username : username,
+      description : description,
+      duration : duration,
+      date : date
     }
-
+    
     console.log(exercise);
-
+    
+    console.log('http://localhost:5000/exercises/update/' + params.id);
     axios.post('http://localhost:5000/exercises/update/' + params.id, exercise)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    // window.location = '/';
   }
   
   return (

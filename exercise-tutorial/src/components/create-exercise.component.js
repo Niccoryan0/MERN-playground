@@ -13,7 +13,7 @@ const EditExercise = () => {
   const [duration, setDuration] = useState(0);
   const updateDuration = e => setDuration(e.target.value);
   const [date, setDate] = useState(new Date());
-  const updateDate = e => setDate(e.target.value);
+  const updateDate = date => setDate(date);
 
   const [users, setUsers] = useState([]);
   useEffect(async () => {
@@ -53,7 +53,7 @@ const EditExercise = () => {
       <form onSubmit={submitForm}>
         <div className="form-group"> 
           <label>Username: </label>
-          <select ref="userInput"
+          <select 
               required
               className="form-control"
               value={username}
