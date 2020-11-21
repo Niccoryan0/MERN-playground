@@ -17,27 +17,30 @@ const EditExercise = () => {
 
   const [users, setUsers] = useState([]);
   const params = useParams();
-  useEffect(async () => {
-    axios.get('http://localhost:5000/exercises/' + params.id)
-    .then(response => {
-        setUsername(response.data.username);
-        setDescription(response.data.description);
-        setDuration(response.data.duration);
-        setDate(new Date(response.data.date));
-    })      
-    .catch(function (error) {
-      console.log(error);
-    })
-
-    axios.get('http://localhost:5000/users/')
-    .then(response => {
-      if (response.data.length > 0) {
-        setUsers(response.data.map(user => user.username));
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  useEffect(() => {
+    async function fetchData(){
+      axios.get('http://localhost:5000/exercises/' + params.id)
+      .then(response => {
+          setUsername(response.data.username);
+          setDescription(response.data.description);
+          setDuration(response.data.duration);
+          setDate(new Date(response.data.date));
+      })      
+      .catch(function (error) {
+        console.log(error);
+      })
+  
+      axios.get('http://localhost:5000/users/')
+      .then(response => {
+        if (response.data.length > 0) {
+          setUsers(response.data.map(user => user.username));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+    fetchData();
   }, []);
 
   const submitForm = (e) => {
@@ -64,7 +67,7 @@ const EditExercise = () => {
       <form onSubmit={submitForm}>
         <div className="form-group"> 
           <label>Username: </label>
-          <select ref="userInput"
+          <select
               required
               className="form-control"
               value={username}
