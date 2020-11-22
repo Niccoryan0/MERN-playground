@@ -35,16 +35,16 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Exercise.findById(req.params.id)
     .then(ex => {
-        console.log(ex);
-        ex.username = req.body.username;
-        ex.description = req.body.description;
-        ex.duration = Number(req.body.duration);
-        ex.date = Date.parse(req.body.date);
-        ex.save()
-          .then(() => res.json('Exercise updated successfully.'))
-          .catch(err => res.status(400).json('Error: ' + err));
-      })
-      .catch(err => res.status(400).json('Error: ' + err));
+      console.log(ex);
+      ex.username = req.body.username;
+      ex.description = req.body.description;
+      ex.duration = Number(req.body.duration);
+      ex.date = Date.parse(req.body.date);
+      ex.save()
+        .then(() => res.json('Exercise updated successfully.'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
