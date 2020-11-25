@@ -1,4 +1,4 @@
-const useFetch(url, opts) {
+const useFetch = (url, opts) => {
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
